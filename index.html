@@ -1,28 +1,86 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<title>Display a map on a webpage</title>
-<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" rel="stylesheet">
-<script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
-<style>
-body { margin: 0; padding: 0; }
-#map { position: absolute; top: 0; bottom: 0; width: 100%; }
-</style>
+    <meta charset="utf-8">
+    <title>MCRT Map</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
+
 <body>
-<div id="map"></div>
-<script>
-	mapboxgl.accessToken = 'pk.eyJ1IjoiZG5vZW4iLCJhIjoiY2xlajhyemQzMDBqMTNwbG1jc2M2bTV4cSJ9.1nzFSXJN_zgrXDSA_s4D6Q';
-    const map = new mapboxgl.Map({
-        container: 'map', // container ID
-        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-        style: 'mapbox://styles/mapbox/streets-v12', // style URL
-        center: [-74.5, 40], // starting position [lng, lat]
-        zoom: 9 // starting zoom
-    });
-</script>
+    <div id="map"></div>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZG5vZW4iLCJhIjoiY2xlajhyemQzMDBqMTNwbG1jc2M2bTV4cSJ9.1nzFSXJN_zgrXDSA_s4D6Q';
+
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/dnoen/cleta0vgs004601qkisfw3l1z',
+            center: [-71.85, 42.32],
+            zoom: 9,
+        });
+
+        // Add zoom and rotation controls to the map.
+        map.addControl(new mapboxgl.NavigationControl());
+
+        const geojson = fetch('segments.geojson')
+            .then((response) => response.json())
+            .then((geojson) => {
+                map.on('load', () => {
+
+                    map.addSource('trail_segments', {
+                        type: 'geojson',
+                        data: geojson
+                    });
+
+                    map.addLayer(
+                        {
+                            id: 'trails',
+                            type: 'line',
+                            source: 'trail_segments',
+                            filter: ['!=', ['get', 'hidden'], true],
+                            paint: {
+                                'line-color': [
+                                    'match', ['get', 'status'],
+                                    'paved', '#426a5a',
+                                    'stone_dust', '#68A357',
+                                    'construction', '#f28f3b',
+                                    'unofficial', '#4d9de0',
+                                    'closed', '#d7263d',
+                                    '#564d80'
+                                ],
+                                'line-dasharray': [
+                                    'match', ['get', 'status'],
+                                    'closed', ["literal", [0.75, 0.5]],
+                                    'construction', ["literal", [0.75, 0.5]],
+                                    'unofficial', ["literal", [3, 0.5]],
+                                    ["literal", [1, 0]]
+                                ],
+                                'line-width': ['case', ['boolean', ['feature-state', 'hover'], false], 6, 3],
+                                'line-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 1, 0.8]
+                            }
+
+                        }
+                    );
+                });
+            });
+
+    </script>
 
 </body>
+
 </html>
