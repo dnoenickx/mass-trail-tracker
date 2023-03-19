@@ -19,13 +19,80 @@
             bottom: 0;
             width: 100%;
         }
+
+        #legend {
+            /* flex */
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 10px;
+            align-content: flex-end;
+            /* position */
+            position: absolute;
+            right: 10px;
+            bottom: 30px;
+            /* style */
+            border: 1px solid #929292;
+            border-radius: 7px;
+            background-color: white;
+
+        }
+
+        .legend-entry {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin: 3px;
+            opacity: 0.8;
+        }
+
+        .legend-entry svg {
+            width: 30px;
+            height: 30px;
+        }
     </style>
 </head>
 
 <body>
     <div id="map"></div>
+    <div id="legend">
+        <div class="legend-entry">
+            <svg viewBox='0 0 10 10'>
+                <line x1='0' y1='10' x2='10' y2='0' stroke='#426a5a' stroke-width='2.5' />
+            </svg>
+            Paved
+        </div>
+        <div class="legend-entry">
+            <svg viewBox='0 0 10 10'>
+                <line x1='0' y1='10' x2='10' y2='0' stroke='#68A357' stroke-width='2.5' />
+            </svg>
+            Stone Dust
+        </div>
+        <div class="legend-entry">
+            <svg viewBox='0 0 10 10'>
+                <line x1='0' y1='10' x2='10' y2='0' stroke='#4d9de0' stroke-width='2.5' stroke-dasharray="6 2" />
+            </svg>
+            Unofficial path
+            <!-- walkable, mountain bikeable -->
+        </div>
+        <div class="legend-entry">
+            <svg viewBox='0 0 10 10'>
+                <line x1='0' y1='10' x2='10' y2='0' stroke='#f28f3b' stroke-width='2.5' stroke-dasharray="1.5 1" />
+            </svg>
+            Under Construction
+        </div>
+        <div class="legend-entry">
+            <svg viewBox='0 0 10 10'>
+                <line x1='0' y1='10' x2='10' y2='0' stroke='#d7263d' stroke-width='2.5' stroke-dasharray="1.5 1" />
+            </svg>
+            Closed
+            <!-- private property, missing bridge, active RR, etc. -->
+        </div>
+    </div>
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiZG5vZW4iLCJhIjoiY2xlajhyemQzMDBqMTNwbG1jc2M2bTV4cSJ9.1nzFSXJN_zgrXDSA_s4D6Q';
+
 
         const map = new mapboxgl.Map({
             container: 'map',
@@ -70,17 +137,14 @@
                                     'unofficial', ["literal", [3, 0.5]],
                                     ["literal", [1, 0]]
                                 ],
-                                'line-width': ['case', ['boolean', ['feature-state', 'hover'], false], 6, 3],
+                                'line-width': ['case', ['boolean', ['feature-state', 'hover'], false], 6, 4],
                                 'line-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 1, 0.8]
                             }
-
                         }
                     );
                 });
             });
-
     </script>
-
 </body>
 
 </html>
