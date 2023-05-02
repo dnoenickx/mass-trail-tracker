@@ -37,7 +37,7 @@ const geojson = fetch('segments.geojson')
                     id: 'trails',
                     type: 'line',
                     source: 'trail_segments',
-                    filter: ['any', beta, ['!=', ['get', 'hidden'], true]],
+                    filter: ['any', beta, ['==', ['get', 'hidden'], false],],
                     paint: {
                         'line-color': [
                             'match', ['get', 'status'],
@@ -107,13 +107,23 @@ map.on('mouseleave', 'trails', () => {
 let div = document.createElement('div');
 div.className = 'mapboxgl-ctrl mapboxgl-ctrl-group';
 div.innerHTML = `
-    <button id="layer-button" type="button" aria-label="Toggle layers" aria-disabled="false">
-    <img src="layers.svg" alt="">
-    <span class="mapboxgl-ctrl-icon" aria-hidden="true" title="Toggle layers"></span>
-    </button>
+    <div class="tooltip">
+        <button id="layer-button" type="button">
+            <img src="layers.svg" alt="">
+        </button>
+        <div id="layer-menu" class="tooltiptext tooltip-left">
+            <button type="button" value="mapbox://styles/dnoen/cleta0vgs004601qkisfw3l1z">Trail Tracker</button>
+            <button type="button" value="mapbox://styles/mapbox/satellite-v9">Satellite</button>
+            <button type="button" value="mapbox://styles/mapbox/satellite-streets-v12">Satellite-streets</button>
+            <button type="button" value="mapbox://styles/mapbox/light-v11">Light</button>
+            <button type="button" value="mapbox://styles/mapbox/dark-v11">Dark</button>
+            <button type="button" value="mapbox://styles/mapbox/streets-v12">Streets</button>
+            <button type="button" value="mapbox://styles/mapbox/outdoors-v12">Outdoors</button>
+        </div>
+    </div>
     <button id="legend-toggle" type="button" aria-label="Toggle legend" aria-disabled="false">
-    <img src="legend.svg" alt="">
-    <span class="mapboxgl-ctrl-icon" aria-hidden="true" title="Toggle legend"></span>
+        <img src="legend.svg" alt="">
+        <span class="mapboxgl-ctrl-icon" aria-hidden="true" title="Toggle legend"></span>
     </button>
     `;
 document.getElementsByClassName('mapboxgl-ctrl-top-right')[0].appendChild(div);
@@ -129,21 +139,14 @@ div.innerHTML = `
 document.getElementsByClassName('mapboxgl-ctrl-top-right')[0].appendChild(div);
 
 
-// Control layer toggling
-let style_index = 0;
-const styles = [
-    "mapbox://styles/dnoen/cleta0vgs004601qkisfw3l1z",
-    "mapbox://styles/mapbox/satellite-streets-v12",
-    "mapbox://styles/mapbox/light-v11",
-    "mapbox://styles/mapbox/dark-v11",
-    "mapbox://styles/mapbox/streets-v12",
-    "mapbox://styles/mapbox/outdoors-v12"
-]
-document.getElementById("layer-button").addEventListener("click", () => {
-    style_index = ++style_index % styles.length;
-    map.setStyle(styles[style_index]);
-});
-
+// Layer selection
+document.getElementById('layer-menu').addEventListener('click', (event) => {
+  const isButton = event.target.nodeName === 'BUTTON';
+  if (!isButton) {
+    return;
+  }
+  map.setStyle(event.target.value);
+})
 
 // Control legend toggling
 const legendToggle = document.getElementById("legend-toggle");
