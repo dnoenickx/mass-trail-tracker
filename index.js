@@ -104,7 +104,7 @@ map.on('mouseleave', 'trails', () => {
 
 
 // Add menus
-const div = document.createElement('div');
+let div = document.createElement('div');
 div.className = 'mapboxgl-ctrl mapboxgl-ctrl-group';
 div.innerHTML = `
     <button id="layer-button" type="button" aria-label="Toggle layers" aria-disabled="false">
@@ -114,6 +114,16 @@ div.innerHTML = `
     <button id="legend-toggle" type="button" aria-label="Toggle legend" aria-disabled="false">
     <img src="legend.svg" alt="">
     <span class="mapboxgl-ctrl-icon" aria-hidden="true" title="Toggle legend"></span>
+    </button>
+    `;
+document.getElementsByClassName('mapboxgl-ctrl-top-right')[0].appendChild(div);
+
+div = document.createElement('div');
+div.className = 'mapboxgl-ctrl mapboxgl-ctrl-group';
+div.innerHTML = `
+    <button id="help-button" type="button" aria-label="About" aria-disabled="false">
+    <img src="help.svg" alt="">
+    <span class="mapboxgl-ctrl-icon" aria-hidden="true" title="About"></span>
     </button>
     `;
 document.getElementsByClassName('mapboxgl-ctrl-top-right')[0].appendChild(div);
@@ -145,3 +155,19 @@ function toggleLegend() {
 legendToggle.addEventListener("click", toggleLegend);
 if (window.innerWidth >= 800)
     toggleLegend();
+
+
+// Control help modal
+const modal = document.getElementById("modal");
+document.getElementById("help-button").addEventListener("click", () => {
+    modal.style.display = "block";
+});
+
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+};
+
