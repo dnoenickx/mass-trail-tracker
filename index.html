@@ -8,58 +8,19 @@
     <!-- MapBox -->
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
 
-        #map {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 100%;
-        }
-
-        #legend {
-            /* flex */
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: flex-end;
-            gap: 10px;
-            align-content: flex-end;
-            /* position */
-            position: absolute;
-            right: 10px;
-            bottom: 30px;
-            /* style */
-            border: 1px solid #929292;
-            border-radius: 7px;
-            background-color: white;
-            /* spacing */
-            padding: 7px;
-            max-width: calc(100% - 30px);;
-
-        }
-
-        .legend-entry {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            margin: 3px;
-            opacity: 0.8;
-        }
-
-        .legend-entry svg {
-            width: 30px;
-            height: 30px;
-        }
-    </style>
+    <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
+    <div id="header">
+        <a href="/"><img id="logo" src="logo.svg" /></a>
+        <nav class="nav">
+            <!-- <a href="/about.html">About</a> -->
+        </nav>
+    </div>
     <div id="map"></div>
+
     <div id="legend">
         <div class="legend-entry">
             <svg viewBox='0 0 10 10'>
@@ -78,8 +39,6 @@
                 <line x1='0' y1='10' x2='10' y2='0' stroke='#4d9de0' stroke-width='2.5' stroke-dasharray="6 2" />
             </svg>
             Protected/Unimproved
-            <!-- Unofficial path -->
-            <!-- walkable, mountain bikeable -->
         </div>
         <div class="legend-entry">
             <svg viewBox='0 0 10 10'>
@@ -92,66 +51,11 @@
                 <line x1='0' y1='10' x2='10' y2='0' stroke='#d7263d' stroke-width='2.5' stroke-dasharray="1.5 1" />
             </svg>
             Closed
-            <!-- private property, missing bridge, active RR, etc. -->
         </div>
     </div>
-    <script>
-        mapboxgl.accessToken = 'pk.eyJ1IjoiZG5vZW4iLCJhIjoiY2xlajhyemQzMDBqMTNwbG1jc2M2bTV4cSJ9.1nzFSXJN_zgrXDSA_s4D6Q';
-
-
-
-        const map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/dnoen/cleta0vgs004601qkisfw3l1z',
-            center: [-71.85, 42.32],
-            zoom: 9,
-            hash: true
-        });
-
-        // Add zoom and rotation controls to the map.
-        map.addControl(new mapboxgl.NavigationControl());
-
-        const geojson = fetch('segments.geojson')
-            .then((response) => response.json())
-            .then((geojson) => {
-                map.on('load', () => {
-
-                    map.addSource('trail_segments', {
-                        type: 'geojson',
-                        data: geojson
-                    });
-
-                    map.addLayer(
-                        {
-                            id: 'trails',
-                            type: 'line',
-                            source: 'trail_segments',
-                            filter: ['!=', ['get', 'hidden'], true],
-                            paint: {
-                                'line-color': [
-                                    'match', ['get', 'status'],
-                                    'paved', '#426a5a',
-                                    'stone_dust', '#68A357',
-                                    'construction', '#f28f3b',
-                                    'unofficial', '#4d9de0',
-                                    'closed', '#d7263d',
-                                    '#564d80'
-                                ],
-                                'line-dasharray': [
-                                    'match', ['get', 'status'],
-                                    'closed', ["literal", [0.75, 0.5]],
-                                    'construction', ["literal", [0.75, 0.5]],
-                                    'unofficial', ["literal", [3, 0.5]],
-                                    ["literal", [1, 0]]
-                                ],
-                                'line-width': ['case', ['boolean', ['feature-state', 'hover'], false], 6, 4],
-                                'line-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 1, 0.8]
-                            }
-                        }
-                    );
-                });
-            });
-    </script>
 </body>
+<script src="index.js"></script>
 
 </html>
+
+<!-- The information presented here is not definitive.  Trail conditions and the status of gaps can change without being noted here.   -->

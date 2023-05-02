@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css?family=Niramit:300,300i,700');
+
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+	font-family: 'K2D', sans-serif;
+	background: #1e1e2f;
+	letter-spacing: 0.5px;
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+#legend {
+    /* flex */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px;
+    align-content: flex-end;
+    /* position */
+    position: absolute;
+    right: 10px;
+    bottom: 30px;
+    /* style */
+    border: 1px solid #929292;
+    border-radius: 7px;
+    background-color: white;
+    /* spacing */
+    padding: 7px;
+    max-width: calc(100% - 30px);
+    /* fading */
+    opacity: 0;
+    transition: opacity 0.5s; 
+}
+
+#legend-toggle.active {
+    background-color: rgb(0 0 0/15%);
+}
+
+#legend.hidden {
+  opacity: 1;
+}
+
+
+.legend-entry {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin: 3px;
+    opacity: 0.8;
+}
+
+.legend-entry svg {
+    width: 30px;
+    height: 30px;
+}
+
+#legend-icon {
+    box-shadow: 0 0 0 2px rgba(0,0,0,.1);
+    float: right;
+    margin: 0 10px 10px 0;
+    background: #fff;
+    border-radius: 4px;
+    aspect-ratio: 1/1;
+    width: 75px;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+}
+
+#legend-icon>img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -25px 0 0 -25px;
+    -webkit-filter: brightness(0) invert(0.25);
+    filter: brightness(0) invert(0.25);
+}
+
+
+/* Header */
+#header {
+	background-color: hsl(142deg 12% 45% / 85%);
+	height: 60px;
+	width: 100%;
+	position: absolute !important;
+	display: flex !important;
+	align-items: center !important;
+	z-index: 1;
+	box-shadow: 0 4px 2px -1px rgb(0 0 0 / 15%);
+	justify-content: space-between;
+	padding: 0 40px;
+}
+
+#header #logo {
+	height: 40px;
+	vertical-align: middle;
+}
+
+#header a:link,
+#header a:visited {
+	padding-left: 15px;
+	color: white;
+}
+
+/* Mapbox  */
+
+.mapboxgl-ctrl-top-right {
+	margin-top: 60px;
+}
