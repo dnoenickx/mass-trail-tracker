@@ -27,7 +27,7 @@ function addDataLayers() {
             type: 'line',
             source: 'trail_segments',
             filter: [
-                "all", 
+                "all",
                 ["in", ["get", "status"], ["literal", statusValues]],
                 ["!=", ["get", "hidden"], true],
                 [
@@ -58,6 +58,17 @@ function addDataLayers() {
             }
         }
     );
+
+    if (urlParams.has("trail")) {
+        const segs = geojson.features.filter(f => f.properties.trails.includes(urlParams.get("trail")));
+        const bounds = new mapboxgl.LngLatBounds();
+        for (const s of segs){
+            const coords = s.geometry.coordinates[0];
+            bounds.extend(coords[0].slice(0, 2));
+            bounds.extend(coords[coords.length - 1].slice(0, 2));
+        }
+        map.fitBounds(bounds, {padding: 200});
+    }
 }
 
 map.on('style.load', () => {
@@ -66,11 +77,11 @@ map.on('style.load', () => {
 
 
 map.on('load', () => {
-    d3.json('segments.geojson', function(err, data) {
+    d3.json('segments.geojson', function (err, data) {
         if (err) return console.log(err);
         geojson = data;
         addDataLayers();
-      });
+    });
 });
 
 
