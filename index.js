@@ -1,106 +1,115 @@
-mapboxgl.accessToken = 'pk.eyJ1IjoiZG5vZW4iLCJhIjoiY2xlajhyemQzMDBqMTNwbG1jc2M2bTV4cSJ9.1nzFSXJN_zgrXDSA_s4D6Q';
-
-
-let hoveredTrailId = null;
-
-// Check beta flag
-const urlParams = new URLSearchParams(window.location.search);
-const beta = urlParams.has('beta');
-
-
 // Configure map
+mapboxgl.accessToken = 'pk.eyJ1IjoiZG5vZW4iLCJhIjoiY2w5NmRxNnplMm5kNDNubWZ3MXVkb2Q3MCJ9.wcsjfh67FGfiW_cTFWajdA';
 const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/dnoen/cleta0vgs004601qkisfw3l1z',
     center: [-71.85, 42.32],
     zoom: 9,
     minZoom: 7
-    // hash: true
 });
-
-// Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());
 
-// Load map layers
-const geojson = fetch('segments.geojson')
-    .then((response) => response.json())
-    .then((geojson) => {
-        map.on('style.load', () => {
+const statusValues = ["paved", "stone_dust", "unofficial", "construction", "closed"];
 
-            map.addSource('trail_segments', {
-                type: 'geojson',
-                data: geojson
-            });
+let geojson;
+let hoveredTrailId = null;
+const urlParams = new URLSearchParams(window.location.search);
 
-            map.addLayer(
-                {
-                    id: 'trails',
-                    type: 'line',
-                    source: 'trail_segments',
-                    filter: ['any', beta, ['==', ['get', 'hidden'], false],],
-                    paint: {
-                        'line-color': [
-                            'match', ['get', 'status'],
-                            'paved', '#426a5a',
-                            'stone_dust', '#68A357',
-                            'construction', '#f28f3b',
-                            'unofficial', '#4d9de0',
-                            'closed', '#d7263d',
-                            '#564d80'
-                        ],
-                        'line-dasharray': [
-                            'match', ['get', 'status'],
-                            'closed', ["literal", [0.75, 0.5]],
-                            'construction', ["literal", [0.75, 0.5]],
-                            'unofficial', ["literal", [3, 0.5]],
-                            ["literal", [1, 0]]
-                        ],
-                        'line-width': ['case', ['boolean', ['feature-state', 'hover'], false], 5, 4],
-                        'line-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 1, 0.8]
-                    }
-                }
-            );
-        });
+function addDataLayers() {
+    map.addSource('trail_segments', {
+        type: 'geojson',
+        data: geojson
     });
 
-
-
-// Mouse enter
-map.on('mouseenter', 'trails', (e) => {
-    // change cursor to pointer
-    map.getCanvas().style.cursor = 'pointer';
-    // Update hovered trail
-    if (e.features.length > 0) {
-        // Remove previous hover
-        if (hoveredTrailId !== null) {
-            map.setFeatureState(
-                { source: 'trail_segments', id: hoveredTrailId },
-                { hover: false }
-            );
+    map.addLayer(
+        {
+            id: 'trails',
+            type: 'line',
+            source: 'trail_segments',
+            filter: [
+                "all", 
+                ["in", ["get", "status"], ["literal", statusValues]],
+                ["!=", ["get", "hidden"], true],
+                [
+                    "any",
+                    !urlParams.has("trail"),
+                    ["in", urlParams.get("trail"), ['get', 'trails']],
+                ],
+            ],
+            paint: {
+                'line-color': [
+                    'match', ['get', 'status'],
+                    'paved', '#426a5a',
+                    'stone_dust', '#68A357',
+                    'construction', '#f28f3b',
+                    'unofficial', '#4d9de0',
+                    'closed', '#d7263d',
+                    '#564d80'
+                ],
+                'line-dasharray': [
+                    'match', ['get', 'status'],
+                    'closed', ["literal", [0.75, 0.5]],
+                    'construction', ["literal", [0.75, 0.5]],
+                    'unofficial', ["literal", [3, 0.5]],
+                    ["literal", [1, 0]]
+                ],
+                'line-width': ['case', ['boolean', ['feature-state', 'hover'], false], 5, 4],
+                'line-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 1, 0.8]
+            }
         }
-        // Set new hover
-        hoveredTrailId = e.features[0].id;
-        map.setFeatureState(
-            { source: 'trail_segments', id: hoveredTrailId },
-            { hover: true }
-        );
-    }
+    );
+}
+
+map.on('style.load', () => {
+    if (geojson) addDataLayers();
 });
 
 
-// Mouse leave
-map.on('mouseleave', 'trails', () => {
-    // restore default cursor
-    map.getCanvas().style.cursor = '';
-    // Remove previous hover
-    if (hoveredTrailId !== null) {
-        map.setFeatureState(
-            { source: 'trail_segments', id: hoveredTrailId },
-            { hover: false }
-        );
-    }
-    hoveredTrailId = null;
+map.on('load', () => {
+    d3.json('segments.geojson', function(err, data) {
+        if (err) return console.log(err);
+        geojson = data;
+        addDataLayers();
+      });
 });
+
+
+// // Mouse enter
+// map.on('mouseenter', 'trails', (e) => {
+//     // change cursor to pointer
+//     map.getCanvas().style.cursor = 'pointer';
+//     // Update hovered trail
+//     if (e.features.length > 0) {
+//         // Remove previous hover
+//         if (hoveredTrailId !== null) {
+//             map.setFeatureState(
+//                 { source: 'trail_segments', id: hoveredTrailId },
+//                 { hover: false }
+//             );
+//         }
+//         // Set new hover
+//         hoveredTrailId = e.features[0].id;
+//         map.setFeatureState(
+//             { source: 'trail_segments', id: hoveredTrailId },
+//             { hover: true }
+//         );
+//     }
+// });
+
+
+// // Mouse leave
+// map.on('mouseleave', 'trails', () => {
+//     // restore default cursor
+//     map.getCanvas().style.cursor = '';
+//     // Remove previous hover
+//     if (hoveredTrailId !== null) {
+//         map.setFeatureState(
+//             { source: 'trail_segments', id: hoveredTrailId },
+//             { hover: false }
+//         );
+//     }
+//     hoveredTrailId = null;
+// });
 
 
 // Add menus
@@ -112,7 +121,7 @@ div.innerHTML = `
             <img src="layers.svg" alt="">
         </button>
         <div id="layer-menu" class="tooltiptext tooltip-left">
-            <button type="button" value="mapbox://styles/dnoen/cleta0vgs004601qkisfw3l1z">Trail Tracker</button>
+            <button type="button" value="mapbox://styles/dnoen/cleta0vgs004601qkisfw3l1z">Default</button>
             <button type="button" value="mapbox://styles/mapbox/satellite-v9">Satellite</button>
             <button type="button" value="mapbox://styles/mapbox/satellite-streets-v12">Satellite-streets</button>
             <button type="button" value="mapbox://styles/mapbox/light-v11">Light</button>
@@ -141,11 +150,9 @@ document.getElementsByClassName('mapboxgl-ctrl-top-right')[0].appendChild(div);
 
 // Layer selection
 document.getElementById('layer-menu').addEventListener('click', (event) => {
-  const isButton = event.target.nodeName === 'BUTTON';
-  if (!isButton) {
-    return;
-  }
-  map.setStyle(event.target.value);
+    const isButton = event.target.nodeName === 'BUTTON';
+    if (!isButton) return;
+    map.setStyle(event.target.value);
 })
 
 // Control legend toggling
