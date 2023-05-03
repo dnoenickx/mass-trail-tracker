@@ -1,5 +1,5 @@
 // Configure map
-mapboxgl.accessToken = 'pk.eyJ1IjoiZG5vZW4iLCJhIjoiY2w5NmRxNnplMm5kNDNubWZ3MXVkb2Q3MCJ9.wcsjfh67FGfiW_cTFWajdA';
+mapboxgl.accessToken = 'pk.eyJ1IjoiZG5vZW4iLCJhIjoiY2xlajhyemQzMDBqMTNwbG1jc2M2bTV4cSJ9.1nzFSXJN_zgrXDSA_s4D6Q';
 const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/dnoen/cleta0vgs004601qkisfw3l1z',
