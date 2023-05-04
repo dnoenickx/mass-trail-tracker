@@ -13,6 +13,7 @@ body {
     font-family: 'K2D', sans-serif;
     background: #1e1e2f;
     letter-spacing: 0.5px;
+    overflow: hidden;
 }
 
 #map {
@@ -133,6 +134,8 @@ body {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    max-height: 80%;
+    overflow-y: auto;
 }
 
 
