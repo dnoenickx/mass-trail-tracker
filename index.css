@@ -23,6 +23,21 @@ body {
     width: 100%;
 }
 
+#close {
+    float:right;
+    display:inline-block;
+    padding:2px 5px;
+    background:#ccc;
+}
+
+#close:hover {
+    float:right;
+    display:inline-block;
+    padding:2px 5px;
+    background:#ccc;
+    color:#fff;
+}
+
 #legend {
     /* flex */
     display: flex;
@@ -89,6 +104,49 @@ body {
     vertical-align: middle;
 }
 
+#info {
+    width: 25%;
+    max-height: calc(100% - 120px);
+    top: 80px;
+    left: 15px;
+    /* style */
+    border: 1px solid #929292;
+    border-radius: 7px;
+    background-color: white;
+    padding: 10px;
+    position: absolute;
+}
+
+.resource:hover {
+    cursor: pointer;
+    color: #888;
+}
+.resource {
+    display: block;
+    border: 1px solid #929292;
+    border-radius: 7px;
+    background-color: white;
+    padding: 10px;
+    margin: 5px;
+    color: #555;
+    cursor: pointer;
+}
+
+#info>h1{
+    font-size:larger;
+}
+
+#info>ul{
+    padding-left: 20px;
+    font-style: italic;
+    color: #555;
+    font-size:medium;
+}
+
+#info>p{
+    text-align: justify;
+}
+
 #header a:link,
 #header a:visited {
     padding-left: 15px;
@@ -126,8 +184,7 @@ body {
 #modal>div {
     margin: auto;
     max-width: 700px;
-    width: 75%;
-    padding: 25px;
+    width: calc(100% - 50px);
     background: #fff;
     position: absolute;
     float: left;
