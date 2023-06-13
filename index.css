@@ -23,14 +23,15 @@ body {
     width: 100%;
 }
 
-#close {
+.close {
     float:right;
     display:inline-block;
     padding:2px 5px;
     background:#ccc;
+    cursor: pointer;
 }
 
-#close:hover {
+.close:hover {
     float:right;
     display:inline-block;
     padding:2px 5px;
@@ -105,16 +106,29 @@ body {
 }
 
 #info {
-    width: 25%;
+    display: none;
+    width: 100%;
     max-height: calc(100% - 120px);
-    top: 80px;
-    left: 15px;
-    /* style */
     border: 1px solid #929292;
-    border-radius: 7px;
+    border-radius: 7px 7px 0 0;
     background-color: white;
     padding: 10px;
     position: absolute;
+    bottom: 0;
+    padding: 10px 10px 40px 10px;
+    max-height: 40%;
+    overflow: auto;
+}
+
+
+@media screen and (min-width: 800px) {
+    #info {
+        top: 80px;
+        left: 15px;
+        width: 35%;
+        max-height: 85%;
+        height: min-content;
+    }
 }
 
 .resource:hover {

@@ -10,16 +10,16 @@
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
     <script src='//d3js.org/d3.v3.min.js' charset='utf-8'></script>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6NGYW74M5H"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-6NGYW74M5H');
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-6NGYW74M5H');
 </script>
 
 <body>
@@ -62,44 +62,49 @@
             Closed
         </div>
     </div>
+    <div id="info"></div>
+    </div>
     <div id="modal">
         <div>
-            <i>As of May 2023, I am still working on adding features to this website. There's more to come!</i>
-            <h3>Mission</h3>
-            To help you find:
-            <ul style="padding-left: 35px;">
-                <li>trails</li>
-                <li>local trail advocacy groups</li>
-                <li>information aboout trail construction (e.g. articles, press releases)</li>
-            </ul>
+            <span onclick="closeModal()" class="close">x</span>
+            <div id="modal-content" style="padding:15px">
+                <i>As of June 2023, I am still working on adding features to this website. There's more to come!</i>
+                <h3>Mission</h3>
+                To help you find:
+                <ul style="padding-left: 35px;">
+                    <li>trails</li>
+                    <li>local trail advocacy groups</li>
+                    <li>information aboout trail construction (e.g. articles, press releases)</li>
+                </ul>
 
-            <h3>Additional Mapping Resources</h3>
-            <ul style="padding-left: 35px;">
-                <li><a href="https://trailmap.mapc.org/">Trail Map | MAPC</a></li>
-                <li>
-                    <a href="https://experience.arcgis.com/experience/75ad0564b18f48f5973657d65d2a775d/page/Page/">
-                        Massachusetts Priority Trails Network | MassDOT
-                    </a>
-                </li>
-                <li><a
-                        href="https://massdot.maps.arcgis.com/apps/webappviewer/index.html?id=76fc33869d534c6ba0b16803d25ee990">
-                        Bicycle Facility Inventory | MassDOT
-                    </a>
-                </li>
-                <li>
-                    <a href="https://masstrails.com/bigmap.html">Mass Trails</a>
-                </li>
-            </ul>
+                <h3>Additional Mapping Resources</h3>
+                <ul style="padding-left: 35px;">
+                    <li><a href="https://trailmap.mapc.org/">Trail Map | MAPC</a></li>
+                    <li>
+                        <a href="https://experience.arcgis.com/experience/75ad0564b18f48f5973657d65d2a775d/page/Page/">
+                            Massachusetts Priority Trails Network | MassDOT
+                        </a>
+                    </li>
+                    <li><a
+                            href="https://massdot.maps.arcgis.com/apps/webappviewer/index.html?id=76fc33869d534c6ba0b16803d25ee990">
+                            Bicycle Facility Inventory | MassDOT
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://masstrails.com/bigmap.html">Mass Trails</a>
+                    </li>
+                </ul>
 
-            <h3>Contact</h3>
-            email me: <a href="mailto:mass.trail.tracker@gmail.com">mass.trail.tracker@gmail.com</a>
-            <br>
-            <br>
+                <h3>Contact</h3>
+                email me: <a href="mailto:mass.trail.tracker@gmail.com">mass.trail.tracker@gmail.com</a>
+                <br>
+                <br>
 
-            <hr><b>
-                The information presented here is not definitive. Trail conditions and the status of gaps can change
-                without being noted here.
-            </b>
+                <hr><b>
+                    The information presented here is not definitive. Trail conditions and the status of gaps can change
+                    without being noted here.
+                </b>
+            </div>
         </div>
     </div>
 </body>

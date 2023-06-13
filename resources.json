@@ -1,0 +1,187 @@
+[
+    {
+        "trail_id": "aart",
+        "text": "Wikipedia: Assabet River Rail Trail",
+        "url": "https://en.wikipedia.org/wiki/Assabet_River_Rail_Trail"
+    },
+    {
+        "trail_id": "alewife_lp",
+        "text": "Wikipedia: Somerville Community Path",
+        "url": "https://en.wikipedia.org/wiki/Somerville_Community_Path"
+    },
+    {
+        "trail_id": "amesbury",
+        "text": "Amesbury Trails",
+        "url": "http://www.amesburytrails.net/riverwalk-trail"
+    },
+    {
+        "trail_id": "ashuwillticook",
+        "text": "Wikipedia: Ashuwillticook Rail Trail",
+        "url": "https://en.wikipedia.org/wiki/Ashuwillticook_Rail_Trail"
+    },
+    {
+        "trail_id": "ashuwillticook",
+        "text": "Mass Gov: Ashuwillticook Rail Trail",
+        "url": "https://www.mass.gov/locations/ashuwillticook-rail-trail"
+    },
+    {
+        "trail_id": "bay_colony",
+        "text": "Bay Colony Rail Trail Association",
+        "url": "https://www.baycolonyrailtrail.org/"
+    },
+    {
+        "trail_id": "belmont",
+        "text": "Belmonth Community Path - phase 1",
+        "url": "https://belmontcommunitypath.com/"
+    },
+    {
+        "trail_id": "belmont",
+        "text": "Belmonth Community Path - phase 2",
+        "url": "https://www.belmontcommunitypathphase2.com/"
+    },
+    {
+        "trail_id": "bfrt",
+        "text": "Friends of the Bruce Freeman Rail Trail",
+        "url": "https://brucefreemanrailtrail.org/"
+    },
+    {
+        "trail_id": "billerica",
+        "text": "Billerica: Bike Path",
+        "url": "https://www.town.billerica.ma.us/534/Bike-Path"
+    },
+    {
+        "trail_id": "bourne",
+        "text": "Friends of the Bourne Rail Trail",
+        "url": "https://www.bournerailtrail.org"
+    },
+    {
+        "trail_id": "canalside",
+        "text": "Mass Gov: Canalside Rail Trail",
+        "url": "https://www.mass.gov/locations/canalside-rail-trail"
+    },
+    {
+        "trail_id": "ccrt",
+        "text": "Mass Gov: Cape Cod Rail Trail",
+        "url": "https://www.mass.gov/locations/cape-cod-rail-trail"
+    },
+    {
+        "trail_id": "ccrt",
+        "text": "Cape Cod Bike Guide",
+        "url": "https://www.capecodbikeguide.com/railtrail.asp"
+    },
+    {
+        "trail_id": "charles",
+        "text": "Mass Gov: Charles River Reservation",
+        "url": "https://www.mass.gov/locations/charles-river-reservation"
+    },
+    {
+        "trail_id": "clipper_city",
+        "text": "Newburyport: Clipper City Rail Trail & Harborwalk",
+        "url": "https://www.cityofnewburyport.com/planning-development/clipper-city-rail-trail-harborwalk"
+    },
+    {
+        "trail_id": "clipper_city",
+        "text": "Newburyport: Trail Map",
+        "url": "https://www.cityofnewburyport.com/sites/g/files/vyhlif7106/f/uploads/railtrailhandout2_0.pdf"
+    },
+    {
+        "trail_id": "clipper_city",
+        "text": "Coastal Trails Coalition",
+        "url": "https://coastaltrails.org/the-trail-network/clipper-city-rail-trail-newburyport/"
+    },
+    {
+        "trail_id": "cochituate",
+        "text": "Friends of Natick Trails",
+        "url": "https://www.friendsofnaticktrails.org/home/crt"
+    },
+    {
+        "trail_id": "ebg",
+        "text": "Friends of the Mary Ellen Welch Greenway",
+        "url": "https://maryellenwelchgreenway.org/projects/greenway-extensions/"
+    },
+    {
+        "trail_id": "fenway",
+        "text": "Boston: Fenway Multiuse Path",
+        "url": "https://www.boston.gov/departments/transportation/fenway-multiuse-path"
+    },
+    {
+        "trail_id": "fitchburg_cutoff",
+        "text": "Wikipedia: Fitchburg Cutoff",
+        "url": "https://en.wikipedia.org/wiki/Fitchburg_Cutoff#Path_conversion"
+    },
+    {
+        "trail_id": "independence_greenway",
+        "text": "MassDOT: Independence Greenway Extension (June 2022)",
+        "url": "https://www.mass.gov/event/peabody-independence-greenway-extension-2022-06-22t183000-0400-2022-06-22t200000-0400"
+    },
+    {
+        "trail_id": "independence_greenway",
+        "text": "Solomon Foundation:",
+        "url": "https://www.solomonfoundation.org/projects/peabody-greenways/"
+    },
+    {
+        "trail_id": "manahan",
+        "text": "Friends of the Manhan Rail Trail",
+        "url": "https://manhanrailtrail.org/"
+    },
+    {
+        "trail_id": "mcrt",
+        "text": "Mass Central Rail Trail",
+        "url": "https://www.masscentralrailtrail.org/"
+    },
+    {
+        "trail_id": "mcrt",
+        "text": "Norwottuck Network",
+        "url": "https://www.nnnetwork.net/"
+    },
+    {
+        "trail_id": "mcrt",
+        "text": "Wikipedia: Mass Central Rail Trail",
+        "url": "https://en.wikipedia.org/wiki/Mass_Central_Rail_Trail"
+    },
+    {
+        "trail_id": "northern_strand",
+        "text": "Bike to the Sea",
+        "url": "https://biketothesea.org/map/"
+    },
+    {
+        "trail_id": "norwottuck",
+        "text": "Mass Gov: Norwottuck Rail Trail",
+        "url": "https://www.mass.gov/locations/norwottuck-rail-trail"
+    },
+    {
+        "trail_id": "sommerville",
+        "text": "Friends of the Community Path",
+        "url": "http://pathfriends.org/scp/"
+    },
+    {
+        "trail_id": "sommerville",
+        "text": "Wikipedia: Somerville Community Path",
+        "url": "https://en.wikipedia.org/wiki/Somerville_Community_Path"
+    },
+    {
+        "trail_id": "swampscott",
+        "text": "Friends of the Swampscott Rail Trail",
+        "url": "https://swampscottrailtrail.org/"
+    },
+    {
+        "trail_id": "swc",
+        "text": "Wikipedia: Southwest Corridor Park",
+        "url": "https://en.wikipedia.org/wiki/Southwest_Corridor_Park"
+    },
+    {
+        "trail_id": "twin_cities",
+        "text": "Twin Cities Rail Trail Association",
+        "url": "https://www.twincitiestrail.com"
+    },
+    {
+        "trail_id": "waltham_wayside",
+        "text": "Waltham: Wayside Trail Updates",
+        "url": "https://www.city.waltham.ma.us/planning-department/pages/walthams-wayside-trail-project"
+    },
+    {
+        "trail_id": "watertown_cambridge",
+        "text": "Cambridge: Watertown-Cambridge Greenway",
+        "url": "https://www.cambridgema.gov/cdd/projects/transportation/watertowncambridgegreenway"
+    }
+]

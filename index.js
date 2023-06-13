@@ -11,21 +11,23 @@ map.addControl(new mapboxgl.NavigationControl());
 
 const statusValues = ["paved", "stone_dust", "unofficial", "construction", "closed"];
 
-let geojson;
+let segments;
+let trails;
+let resources;
 let hoveredTrailId = null;
 const urlParams = new URLSearchParams(window.location.search);
 
 function addDataLayers() {
-    map.addSource('trail_segments', {
+    map.addSource('segments', {
         type: 'geojson',
-        data: geojson
+        data: segments
     });
 
     map.addLayer(
         {
-            id: 'trails',
+            id: 'segments',
             type: 'line',
-            source: 'trail_segments',
+            source: 'segments',
             filter: [
                 "all",
                 ["in", ["get", "status"], ["literal", statusValues]],
@@ -60,67 +62,114 @@ function addDataLayers() {
     );
 
     if (urlParams.has("trail")) {
-        const segs = geojson.features.filter(f => f.properties.trails.includes(urlParams.get("trail")));
+        const segs = segments.features.filter(f => f.properties.trails.includes(urlParams.get("trail")));
         const bounds = new mapboxgl.LngLatBounds();
-        for (const s of segs){
+        for (const s of segs) {
             const coords = s.geometry.coordinates[0];
             bounds.extend(coords[0].slice(0, 2));
             bounds.extend(coords[coords.length - 1].slice(0, 2));
         }
-        map.fitBounds(bounds, {padding: 200});
+        map.fitBounds(bounds, { padding: 200 });
     }
 }
 
 map.on('style.load', () => {
-    if (geojson) addDataLayers();
+    if (segments) addDataLayers();
 });
 
 
 map.on('load', () => {
     d3.json('segments.geojson', function (err, data) {
         if (err) return console.log(err);
-        geojson = data;
+        segments = data;
         addDataLayers();
+    });
+    d3.json('trails.json', function (err, data) {
+        if (err) return console.log(err);
+        trails = data;
+    });
+    d3.json('resources.json', function (err, data) {
+        if (err) return console.log(err);
+        resources = data;
     });
 });
 
 
-// // Mouse enter
-// map.on('mouseenter', 'trails', (e) => {
-//     // change cursor to pointer
-//     map.getCanvas().style.cursor = 'pointer';
-//     // Update hovered trail
-//     if (e.features.length > 0) {
-//         // Remove previous hover
-//         if (hoveredTrailId !== null) {
-//             map.setFeatureState(
-//                 { source: 'trail_segments', id: hoveredTrailId },
-//                 { hover: false }
-//             );
-//         }
-//         // Set new hover
-//         hoveredTrailId = e.features[0].id;
-//         map.setFeatureState(
-//             { source: 'trail_segments', id: hoveredTrailId },
-//             { hover: true }
-//         );
-//     }
-// });
+function closeInfo() { document.getElementById("info").style.display = "none" }
+function closeModal() { document.getElementById("modal").style.display = "none" }
 
 
-// // Mouse leave
-// map.on('mouseleave', 'trails', () => {
-//     // restore default cursor
-//     map.getCanvas().style.cursor = '';
-//     // Remove previous hover
-//     if (hoveredTrailId !== null) {
-//         map.setFeatureState(
-//             { source: 'trail_segments', id: hoveredTrailId },
-//             { hover: false }
-//         );
-//     }
-//     hoveredTrailId = null;
-// });
+function getTrailByID(id) { return trails.find(t => t.id == id) }
+
+
+// When a click event occurs on a feature in the places layer, open a popup at the
+// location of the feature, with description HTML from its properties.
+map.on('click', 'segments', (e) => {
+    // Copy coordinates array.
+    // const coordinates = e.features[0].geometry.coordinates.slice();
+    const clickedTrailIDs = eval(e.features[0].properties.trails);
+    const clickedTrails = clickedTrailIDs.map(id => getTrailByID(id));;
+
+    info.style.display = "block";
+
+    const infoDiv = document.getElementById('info');
+    infoDiv.innerHTML = `<span onclick="closeInfo()" class="close">x</span>`;
+
+    let h1 = document.createElement('h1');
+    h1.innerHTML = clickedTrails[0].name;
+    infoDiv.appendChild(h1);
+
+    if (clickedTrails.length > 1) {
+        infoDiv.innerHTML += (`<p style="color: #555;">Also part of:</p>`);
+        let ul = document.createElement('ul');
+        for (const t of clickedTrails.slice(1)) {
+            let li = document.createElement('li');
+            li.innerHTML = t.name;
+            ul.appendChild(li);
+        }
+        infoDiv.appendChild(ul);
+    }
+
+
+    let p = document.createElement('p');
+    p.style = "padding: 10px 0;";
+    p.innerHTML = clickedTrails[0].description;
+    infoDiv.appendChild(p);
+
+    const clickResults = resources.filter(r => clickedTrailIDs.includes(r.trail_id));
+    console.log(clickResults);
+
+    for (const res of clickResults) {
+        let div = document.createElement('a');
+        div.setAttribute("href", res.url);
+        div.setAttribute("target", "_blank");
+        div.setAttribute("rel", "noopener noreferrer");
+        div.className = "resource";
+        div.innerHTML += `<div style="width: 40px; float: left;"><i style="font-size:24px" class="fa">&#xf08e;</i></div>` + res.text;
+        infoDiv.appendChild(div);
+    }
+
+    // `
+    // <div class="resource">
+    //     <div style="width: 40px; float: left;">
+    //         <i style="font-size:24px" class="fa">&#xf08e;</i>
+    //     </div>
+    //         Wikipedia: Somerville Community Path
+    // </div>
+    // `
+
+
+});
+
+// Mouse enter
+map.on('mouseenter', 'segments', (e) => {
+    map.getCanvas().style.cursor = 'pointer';
+});
+
+// Mouse leave
+map.on('mouseleave', 'segments', () => {
+    map.getCanvas().style.cursor = '';
+});
 
 
 // Add menus
@@ -172,6 +221,7 @@ const legend = document.getElementById("legend");
 function toggleLegend() {
     legendToggle.classList.toggle('active');
     legend.classList.toggle('hidden');
+    if (legend.classList.contains('hidden') && window.innerWidth < 800) { closeInfo() }
 }
 legendToggle.addEventListener("click", toggleLegend);
 if (window.innerWidth >= 800)
@@ -191,4 +241,3 @@ window.onclick = function (event) {
         modal.style.display = "none";
     }
 };
-
