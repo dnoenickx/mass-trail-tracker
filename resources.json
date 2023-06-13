@@ -183,5 +183,15 @@
         "trail_id": "watertown_cambridge",
         "text": "Cambridge: Watertown-Cambridge Greenway",
         "url": "https://www.cambridgema.gov/cdd/projects/transportation/watertowncambridgegreenway"
+    },
+    {
+        "trail_id": "dover",
+        "text": "Friends of the Dover Greenway",
+        "url": "http://dovergreenwayfriends.com/"
+    },
+    {
+        "trail_id": "medfield",
+        "text": "Friends of the Medfield Rail Trail",
+        "url": "https://medfield.baycolonyrailtrail.org/"
     }
 ]

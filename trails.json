@@ -5,11 +5,6 @@
         "description": "The Assabet River Rail Trail (ARRT) is a partially-completed multi-use rail trail running through the cities and towns of Marlborough, Hudson, Stow, Maynard, and Acton. It is a conversion of the abandoned Marlborough Branch of the Fitchburg Railroad. The right-of-way parallels the Assabet River in the trail's midsection."
     },
     {
-        "id": "alewife_brook",
-        "name": "Alewife Greenway Path",
-        "description": null
-    },
-    {
         "id": "alewife_lp",
         "name": "Alewife Linear Park",
         "description": null
@@ -417,6 +412,106 @@
     {
         "id": "west_springfield_river",
         "name": "Connecticut River Walk and Bikeway",
+        "description": null
+    },
+    {
+        "id": "marion",
+        "name": "Mattapoisett Rail Trail",
+        "description": null
+    },
+    {
+        "id": "sterling",
+        "name": null,
+        "description": null
+    },
+    {
+        "id": "squannocook",
+        "name": "Squannacook River Rail Trail",
+        "description": null
+    },
+    {
+        "id": "depot",
+        "name": "Depot Trail",
+        "description": null
+    },
+    {
+        "id": "alewife",
+        "name": "Alewife Greenway Path",
+        "description": null
+    },
+    {
+        "id": "blackstone",
+        "name": "Blackstone River Bikeway",
+        "description": null
+    },
+    {
+        "id": "ware",
+        "name": null,
+        "description": null
+    },
+    {
+        "id": "braunhardt",
+        "name": "Gloria Braunhardt Bike Path",
+        "description": null
+    },
+    {
+        "id": "tricommunity",
+        "name": "Tri-Community Greenway",
+        "description": null
+    },
+    {
+        "id": "umass",
+        "name": null,
+        "description": null
+    },
+    {
+        "id": "horn_pond",
+        "name": "Horn Pond Trail",
+        "description": null
+    },
+    {
+        "id": "meadow",
+        "name": "Meadow Trail",
+        "description": null
+    },
+    {
+        "id": "north_central",
+        "name": "North Central Pathway",
+        "description": null
+    },
+    {
+        "id": "columbia_river",
+        "name": "Columbia Greenway Rail Trail",
+        "description": null
+    },
+    {
+        "id": "garrison",
+        "name": "William Lloyd Garrison Trail",
+        "description": null
+    },
+    {
+        "id": "southwick",
+        "name": "Southwick Rail Trail",
+        "description": null
+    },
+    {
+        "id": "needham",
+        "name": "Needham Rail Trail",
+        "description": null
+    },
+    {
+        "id": "southampton",
+        "name": "Southampton Greenway",
+        "description": null
+    },
+    {
+        "id": "medfield",
+        "name": "Medfield Rail Trail",
+        "description": null
+    },
+    {
+        "id": "dover",
+        "name": "Dover Greenway",
         "description": null
     }
 ]
