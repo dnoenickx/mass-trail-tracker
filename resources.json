@@ -193,5 +193,20 @@
         "trail_id": "medfield",
         "text": "Friends of the Medfield Rail Trail",
         "url": "https://medfield.baycolonyrailtrail.org/"
+    },
+    {
+        "trail_id": "lynnfield",
+        "text": "Town of Lynnfield Project Website",
+        "url": "https://www.town.lynnfield.ma.us/conservation-commission/pages/rail-trail"
+    },
+    {
+        "trail_id": "wakefield",
+        "text": "Town of Wakefield",
+        "url": "https://www.wakefield.ma.us/community-and-economic-development/pages/rail-trail-project"
+    },
+    {
+        "trail_id": "groveland",
+        "text": "Facebook: Friends of the Groveland Community Trail",
+        "url": "https://www.facebook.com/grovelandcommunitytrail/"
     }
 ]

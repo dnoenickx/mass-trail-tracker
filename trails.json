@@ -513,5 +513,20 @@
         "id": "dover",
         "name": "Dover Greenway",
         "description": null
+    },
+    {
+        "id": "lynnfield",
+        "name": "Lynnfield Rail Trail",
+        "description": "The Lynnfield section of the proposed Rail Trail is a 2.8-mile-long multi-use path and boardwalk extending from Nichols Lane in Peabody through Lynnfield to Fosters Lane in Wakefield.  The Wakefield section will extend an additional 1.6 miles from Fosters Lane to the Galvin Middle School. The 25% design process for the project was completed in 2019.  The 75% design is in process and was initiated in early 2023.  The project is currently listed on the State Transportation Improvement Program for funding in 2026. The Rail Trail may be open in 2028 or 2029."
+    },
+    {
+        "id": "wakefield",
+        "name": "Wakefield Rail Trail",
+        "description": "The Wakefield section will extend an additional 1.6 miles from Fosters Lane to the Galvin Middle School, and also connect to the planned Lynnfield Rail Trail."
+    },
+    {
+        "id": "groveland",
+        "name": "Groveland Community Trail",
+        "description": "The new community trail opened May 25, 2023. The Groveland Community Trail is visioned as a 3.25 mile trail."
     }
 ]
